@@ -8,12 +8,10 @@ package module01
 //
 func Reverse(word string) string {
 	var result string
-
 	// Go through the string from the beginning
 	for _, char := range word {
 		// Build a new string, adding the current char _before_ the result so far.
 		result = string(char) + result
 	}
-
 	return result
 }
