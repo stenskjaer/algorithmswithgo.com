@@ -9,6 +9,20 @@ package module01
 //   DecToBase(14, 16) => "E"
 //   DecToBase(14, 2) => "1110"
 //
+const charset = "0123456789ABCDEF"
+
 func DecToBase(dec, base int) string {
-	return ""
+	// Get remainder from division between decimal and base
+	remainder := string(charset[dec%base])
+
+	// Divide by base
+	divided := dec / base
+
+	// If division remainder is more than 0, repeat
+	if divided > 0 {
+		// Add recursive results to current remainder
+		return DecToBase(divided, base) + remainder
+	}
+
+	return remainder
 }
