@@ -26,3 +26,16 @@ func DecToBase(dec, base int) string {
 
 	return remainder
 }
+
+// DecToBaseAlternative is a more procedural alternative
+// with a loop mutating the decimal value and adding to the
+// result string for each iteration.
+func DecToBaseAlternative(dec, base int) string {
+	var res string
+	for dec > 0 {
+		rem := dec % base
+		res = string(charset[rem]) + res
+		dec /= base
+	}
+	return res
+}
