@@ -18,7 +18,29 @@ import (
 // the power of the position in value string, which reflects
 // its weight.
 //
+// This solution takes a non-recursive approach. I find this
+// to be simpler to read, but grokking how the exponents are
+// calculated takes a bit more concentration.
 func BaseToDec(value string, base int) int {
+	var result int
+	multiplier := 1
+	for i := len(value) - 1; i >= 0; i-- {
+		digit, err := valueInCharset(string(value[i]))
+		if err != nil {
+			fmt.Println("Failure: ", err)
+		}
+
+		result += digit * multiplier
+		multiplier = multiplier * base
+	}
+	return result
+}
+
+// BaseToDecAlternative presents an alternative
+// recursion-based solution. The calculation of the
+// exponents is more explicit here, and I think that is an
+// advantage.
+func BaseToDecAlternative(value string, base int) int {
 	// Zero-indexed length
 	length := len(value) - 1
 
