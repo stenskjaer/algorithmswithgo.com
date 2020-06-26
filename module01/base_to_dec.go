@@ -1,8 +1,6 @@
 package module01
 
 import (
-	"errors"
-	"fmt"
 	"math"
 )
 
@@ -25,10 +23,7 @@ func BaseToDec(value string, base int) int {
 	var result int
 	multiplier := 1
 	for i := len(value) - 1; i >= 0; i-- {
-		digit, err := valueInCharset(string(value[i]))
-		if err != nil {
-			fmt.Println("Failure: ", err)
-		}
+		digit := charToDigit[string(value[i])]
 
 		result += digit * multiplier
 		multiplier = multiplier * base
@@ -45,10 +40,7 @@ func BaseToDecAlternative(value string, base int) int {
 	length := len(value) - 1
 
 	// Get the integer value of the first character
-	integerValue, err := valueInCharset(string(value[0]))
-	if err != nil {
-		fmt.Println("Failure: ", err)
-	}
+	integerValue := charToDigit[string(value[0])]
 
 	// Calculate the conversion of the current character by
 	// multiplying its integer value with the base value
@@ -63,17 +55,21 @@ func BaseToDecAlternative(value string, base int) int {
 	return result
 }
 
-// valueInCharset converts a string value to an integer
-// value within the used charset. This is done by iterating
-// the charset and returning the index of the value, which
-// reflects its numerical value.
-func valueInCharset(character string) (int, error) {
-	var res int
-	var err error
-	for i, val := range charset {
-		if fmt.Sprintf("%c", val) == character {
-			return i, err
-		}
-	}
-	return res, errors.New("the character was not found in the charset")
+var charToDigit = map[string]int {
+	"0": 0,
+	"1": 1,
+	"2": 2,
+	"3": 3,
+	"4": 4,
+	"5": 5,
+	"6": 6,
+	"7": 7,
+	"8": 8,
+	"9": 9,
+	"A": 10,
+	"B": 11,
+	"C": 12,
+	"D": 13,
+	"E": 14,
+	"F": 15,
 }
