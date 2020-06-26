@@ -26,7 +26,7 @@ func BaseToDec(value string, base int) int {
 		digit := charToDigit[string(value[i])]
 
 		result += digit * multiplier
-		multiplier = multiplier * base
+		multiplier *= base
 	}
 	return result
 }
